@@ -11,6 +11,10 @@ const SignUpPage = ({ history }) => (
   </div>
 );
 
+const byPropKey = (propertyName, value) => () => ({
+  [propertyName]: value
+});
+
 const INITIAL_STATE = {
   username: '',
   email: '',
@@ -18,10 +22,6 @@ const INITIAL_STATE = {
   passwordRepeat: '',
   error: null
 };
-
-const byPropKey = (propertyName, value) => () => ({
-  [propertyName]: value
-});
 
 class SignUpForm extends Component {
   constructor(props) {

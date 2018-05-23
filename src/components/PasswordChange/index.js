@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { auth } from '../../firebase';
-import * as routes from '../../constants/routes';
-
-const PasswordForgetPage = () => (
-  <div>
-    <h1>Password Forget</h1>
-    <PasswordForgetForm />
-  </div>
-);
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value
 });
 
 const INITIAL_STATE = {
-  email: '',
+  password: '',
+  passwordRepeat: '',
   error: null
 };
 
-class PasswordForgetForm extends Component {
+class PasswordChangeForm extends Component {
   constructor(props) {
     super(props);
 
@@ -28,10 +20,10 @@ class PasswordForgetForm extends Component {
   }
 
   onSubmit = event => {
-    const { email } = this.state;
+    const { password } = this.state;
 
     auth
-      .doPasswordReset(email)
+      .doPasswordUpdate(password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
       })
@@ -43,19 +35,27 @@ class PasswordForgetForm extends Component {
   };
 
   render() {
-    const { email, error } = this.state;
+    const { password, passwordRepeat, error } = this.state;
 
-    const isInvalid = email === '';
+    const isInvalid = password !== passwordRepeat || password === '';
 
     return (
       <form onSubmit={this.onSubmit}>
         <input
-          value={this.state.email}
+          value={password}
           onChange={event =>
-            this.setState(byPropKey('email', event.target.value))
+            this.setState(byPropKey('password', event.target.value))
           }
-          type="text"
-          placeholder="Email Address"
+          type="password"
+          placeholder="New Password"
+        />
+        <input
+          value={passwordRepeat}
+          onChange={event =>
+            this.setState(byPropKey('passwordRepeat', event.target.value))
+          }
+          type="password"
+          placeholder="Confirm New Password"
         />
         <button disabled={isInvalid} type="submit">
           Reset My Password
@@ -67,12 +67,4 @@ class PasswordForgetForm extends Component {
   }
 }
 
-const PasswordForgetLink = () => (
-  <p>
-    <Link to="/forget-about-it">Forgot Password?</Link>
-  </p>
-);
-
-export default PasswordForgetPage;
-
-export { PasswordForgetForm, PasswordForgetLink };
+export default PasswordChangeForm;
