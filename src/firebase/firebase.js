@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import dbSettings from './dbSettings';
+import dbSettings from '../dbSettings';
 
 const config = {
   apiKey: dbSettings.apiKey,
@@ -10,6 +10,12 @@ const config = {
   messagingSenderId: dbSettings.messagingSenderId
 };
 
-firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
+
+const auth = firebase.auth();
+
+export { auth };
 
 export default firebase;

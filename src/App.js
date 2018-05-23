@@ -5,7 +5,6 @@ import Navigation from './components/Navigation';
 import LandingPage from './components/LandingPage';
 import SignUpPage from './components/SignUpPage';
 import SignInPage from './components/SignInPage';
-import SignOutPage from './components/SignOutPage';
 import PasswordForgetPage from './components/PasswordForgetPage';
 import HomePage from './components/HomePage';
 import AccountPage from './components/AccountPage';
@@ -22,7 +21,6 @@ const App = () => (
       <Route exact path={routes.LANDING} component={() => <LandingPage />} />
       <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
       <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
-      <Route exact path={routes.SIGN_OUT} component={() => <SignOutPage />} />
       <Route
         exact
         path={routes.PASSWORD_FORGET}
