@@ -13,7 +13,6 @@ const Navigation = ({ authUser }) => (
 
 const NavigationAuth = () => (
   <ul>
-    <li />
     <li>
       <Link to={routes.LANDING}>Landing</Link>
     </li>
